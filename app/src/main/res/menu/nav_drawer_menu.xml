@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:title="Feedback"
+        tools:ignore="HardcodedText">
+        <menu>
+            <item
+                android:id="@+id/send_mail_action"
+                android:title="Report Bugs"
+                android:icon="@drawable/ic_baseline_email_24"/>
+        </menu>
+    </item>
+    <item android:title="Communicate"
+        tools:ignore="HardcodedText">
+        <menu>
+            <item
+                android:id="@+id/share_app_action"
+                android:title="Share"
+                android:icon="@drawable/ic_baseline_share_24"/>
+
+            <item
+                android:id="@+id/rate_app_action"
+                android:title="Give Rating"
+                android:icon="@drawable/ic_baseline_star_rate_24"/>
+
+            <item
+                android:id="@+id/more_app_action"
+                android:title="More Apps"
+                android:icon="@drawable/ic_baseline_more_24"/>
+
+            <item
+                android:id="@+id/visitWeb_app_action"
+                android:title="Website"
+                android:icon="@drawable/ic_baseline_web_24"/>
+        </menu>
+
+    </item>
+
+</menu>

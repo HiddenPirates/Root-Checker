@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Root Checker</string>
+
+<!--    <string name="admob_app_id">ca-app-pub-4973218101367420~5070088575</string>-->
+<!--    <string name="admob_banner_id">ca-app-pub-4973218101367420/9823479542</string>-->
+
+<!--    Below is tests-->
+
+    <string name="admob_app_id">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="admob_banner_id">ca-app-pub-3940256099942544/6300978111</string>
+</resources>
