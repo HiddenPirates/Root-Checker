@@ -3,37 +3,68 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <item android:title="Feedback"
+
+    <item
+        android:id="@+id/check_update_action"
+        android:icon="@drawable/ic_update"
+        android:title="Check New Update"
+        tools:ignore="HardcodedText" />
+
+
+    <item
+        android:id="@+id/donate_action"
+        android:icon="@drawable/ic_donation"
+        android:title="Donate Me"
+        tools:ignore="HardcodedText" />
+
+    <item
+        android:title="Feedback"
         tools:ignore="HardcodedText">
         <menu>
             <item
                 android:id="@+id/send_mail_action"
-                android:title="Report Bugs"
-                android:icon="@drawable/ic_baseline_email_24"/>
+                android:icon="@drawable/ic_baseline_email_24"
+                android:title="Report Bugs" />
         </menu>
     </item>
-    <item android:title="Communicate"
+
+    <item
+        android:title="Support"
         tools:ignore="HardcodedText">
         <menu>
             <item
                 android:id="@+id/share_app_action"
-                android:title="Share"
-                android:icon="@drawable/ic_baseline_share_24"/>
+                android:icon="@drawable/ic_baseline_share_24"
+                android:title="Share" />
 
             <item
                 android:id="@+id/rate_app_action"
-                android:title="Give Rating"
-                android:icon="@drawable/ic_baseline_star_rate_24"/>
+                android:icon="@drawable/ic_baseline_star_rate_24"
+                android:title="Give Rating" />
 
             <item
                 android:id="@+id/more_app_action"
-                android:title="More Apps"
-                android:icon="@drawable/ic_baseline_more_24"/>
+                android:icon="@drawable/ic_baseline_more_24"
+                android:title="More Apps" />
+        </menu>
+    </item>
+    <item
+        android:title="Communicate"
+        tools:ignore="HardcodedText">
+        <menu>
 
             <item
                 android:id="@+id/visitWeb_app_action"
-                android:title="Website"
-                android:icon="@drawable/ic_baseline_web_24"/>
+                android:icon="@drawable/ic_browser"
+                android:title="Website" />
+            <item
+                android:id="@+id/visit_github_app_action"
+                android:icon="@drawable/github_icon"
+                android:title="GitHub" />
+            <item
+                android:id="@+id/visit_insta_app_action"
+                android:icon="@drawable/ic_instagram_logo"
+                android:title="Instagram" />
         </menu>
 
     </item>

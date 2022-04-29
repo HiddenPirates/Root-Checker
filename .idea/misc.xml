@@ -3,7 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/My_Files_Pogramms/Android_Projects/RootChecker/app/src/main/res/drawable/github_icon.xml" value="0.226" />
+        <entry key="..\:/My_Files_Pogramms/Android_Projects/RootChecker/app/src/main/res/drawable/ic_baseline_get_app_24.xml" value="0.226" />
+        <entry key="..\:/My_Files_Pogramms/Android_Projects/RootChecker/app/src/main/res/drawable/ic_baseline_web_24.xml" value="0.226" />
+        <entry key="..\:/My_Files_Pogramms/Android_Projects/RootChecker/app/src/main/res/drawable/ic_update.xml" value="0.226" />
         <entry key="..\:/My_Files_Pogramms/Android_Projects/RootChecker/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/My_Files_Pogramms/Android_Projects/RootChecker/app/src/main/res/layout/header_layout.xml" value="0.36666666666666664" />
+        <entry key="..\:/My_Files_Pogramms/Android_Projects/RootChecker/app/src/main/res/menu/nav_drawer_menu.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,50 +9,43 @@
     android:id="@+id/drawerLayout"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <include
             layout="@layout/toolbar"
-            android:id="@+id/material_toolbar" />
+            android:id="@+id/material_toolbar"
+            android:layout_alignParentTop="true"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent" />
 
         <ImageView
+            android:id="@+id/imageView"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:id="@+id/imageView"
-            android:src="@drawable/ic_baseline_phonelink_setup_24"
+            android:layout_below="@+id/material_toolbar"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="60dp"
             android:contentDescription="Status Image"
-            android:layout_marginTop="30dp"
-            tools:ignore="HardcodedText"
-            android:layout_gravity="center_horizontal"/>
+            android:src="@drawable/ic_baseline_phonelink_setup_24"
+            tools:ignore="HardcodedText" />
 
         <TextView
+            android:id="@+id/statusTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/statusTV"
-            android:layout_marginRight="20dp"
+            android:layout_below="@+id/imageView"
             android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:padding="15dp"
             android:text="Demo"
+            android:textAlignment="center"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:padding="15dp"
-            android:textAlignment="center"
-            android:gravity="center_horizontal"
             tools:ignore="HardcodedText"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center_horizontal"/>
-
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/adView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            app:adSize="FULL_BANNER"
-            android:layout_gravity="center_horizontal"
-            app:adUnitId="@string/admob_banner_id">
-        </com.google.android.gms.ads.AdView>
+            android:layout_centerHorizontal="true"/>
 
         <Button
             android:id="@+id/checkBtn"
@@ -63,10 +57,11 @@
             android:layout_marginTop="50dp"
             app:backgroundTint="@color/purple_700"
             android:text="check"
-            tools:ignore="HardcodedText"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            tools:ignore="HardcodedText" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView
         app:headerLayout="@layout/header_layout"

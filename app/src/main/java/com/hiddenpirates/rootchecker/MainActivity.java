@@ -1,10 +1,5 @@
 package com.hiddenpirates.rootchecker;
 
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
@@ -13,20 +8,23 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.AdapterStatus;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
+import com.hiddenpirates.rootchecker.helpers.CustomFunctions;
 
 import java.io.DataOutputStream;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,64 +45,68 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 //_______________________________________________________________________________________
-        MobileAds.initialize(this, initializationStatus -> {
-            Map<String, AdapterStatus> statusMap = initializationStatus.getAdapterStatusMap();
-            for (String adapterClass : statusMap.keySet()) {
-                AdapterStatus status = statusMap.get(adapterClass);
-                assert status != null;
-                Log.d("MyApp", String.format(
-                        "Adapter name: %s, Description: %s, Latency: %d",
-                        adapterClass, status.getDescription(), status.getLatency()));
-            }
-        });
-
-        AdView mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-
-//        MediationTestSuite.launch(MainActivity.this);
-
-//_______________________________________________________________________________________
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.navigation_drawer);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,0,0);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, 0, 0);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-
 //_______________________________________________________________________________________
 
         navigationView.setNavigationItemSelectedListener(item -> {
             Intent intent;
 
-            if (item.getItemId() == R.id.send_mail_action) {
-                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:hiddenpiratesofficial@gmail.com?subject=Application-RootChecker"));
-                startActivity(intent);
+            if (item.getItemId() == R.id.check_update_action) {
+
+                Menu menuNav = navigationView.getMenu();
+                MenuItem checkUpdateItem = menuNav.findItem(R.id.check_update_action);
+                checkUpdateItem.setEnabled(false);
+                checkUpdateItem.setTitle("Checking for new update");
+
+                Toast.makeText(MainActivity.this, "Checking for new update!", Toast.LENGTH_LONG).show();
+
+                CustomFunctions.checkForUpdate(this, checkUpdateItem);
                 return true;
             }
-            else if (item.getItemId() == R.id.share_app_action){
+            else if (item.getItemId() == R.id.donate_action) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://donate.hiddenpirates.com")));
+                return true;
+            }
+            else if (item.getItemId() == R.id.send_mail_action) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:hiddenpiratesofficial@gmail.com?subject=Application - Root Checker")));
+                return true;
+            }
+            else if (item.getItemId() == R.id.share_app_action) {
                 intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_TEXT,"Try this awesome root checker app and gets accurate result. \n https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID);
+                intent.putExtra(Intent.EXTRA_TEXT, "Try this awesome root checker app and gets accurate result. \n https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID);
                 startActivity(Intent.createChooser(intent, "Share through"));
                 return true;
             }
-            else if (item.getItemId() == R.id.rate_app_action){
-                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id="+BuildConfig.APPLICATION_ID));
+            else if (item.getItemId() == R.id.rate_app_action) {
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID));
                 startActivity(intent);
                 return true;
             }
-            else if (item.getItemId() == R.id.more_app_action){
+            else if (item.getItemId() == R.id.more_app_action) {
                 intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/developer?id=Hidden+Pirates"));
                 startActivity(intent);
                 return true;
             }
-            else if (item.getItemId() == R.id.visitWeb_app_action){
+            else if (item.getItemId() == R.id.visitWeb_app_action) {
                 intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://hidden-pirates.blogspot.com"));
                 startActivity(intent);
                 return true;
             }
-            else{
+            else if (item.getItemId() == R.id.visit_github_app_action) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/HiddenPirates")));
+                return true;
+            }
+            else if (item.getItemId() == R.id.visit_insta_app_action) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://instagram.com/__nur_alam__")));
+                return true;
+            }
+            else {
                 return false;
             }
         });
@@ -120,18 +122,17 @@ public class MainActivity extends AppCompatActivity {
 
         String deviceModel = android.os.Build.MODEL;
 
-        statusTV.setText("Device: "+deviceModel);
+        statusTV.setText("Device: " + deviceModel);
 
         checkBtn.setOnClickListener(v -> {
 
-            if (isDeviceRooted()){
+            if (isDeviceRooted()) {
                 imageView.setImageDrawable(tickResource);
-                statusTV.setText("Congratulations! Your device "+deviceModel+" is rooted.");
+                statusTV.setText("Congratulations! Your device " + deviceModel + " is rooted.");
                 statusTV.setTextColor(Color.GREEN);
-            }
-            else {
+            } else {
                 imageView.setImageDrawable(crossResource);
-                statusTV.setText("Oops! Your device "+deviceModel+" is not rooted.");
+                statusTV.setText("Oops! Your device " + deviceModel + " is not rooted.");
                 statusTV.setTextColor(Color.RED);
             }
         });
@@ -147,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         this.doubleBackToExitPressedOnce = true;
-        Snackbar.make(drawerLayout,"Double press to exit!", Snackbar.LENGTH_LONG).show();
+        Snackbar.make(drawerLayout, "Double press to exit!", Snackbar.LENGTH_LONG).show();
 
         new Handler(Looper.getMainLooper()).postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
     }
@@ -171,12 +172,10 @@ public class MainActivity extends AppCompatActivity {
             try {
                 p.waitFor();
                 return p.exitValue() != 255;
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 return false;
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return false;
         }
     }
